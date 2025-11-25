@@ -195,7 +195,7 @@ closeBtn.onclick=()=>modal.classList.remove('open');
 modal.onclick=e=>{if(e.target===modal) modal.classList.remove('open');};
 
 function makeWA(product){
-  const text=encodeURIComponent(`Halo Oscar-Komputer, saya mau tanya tentang produk: ${product}`);
+  const text=encodeURIComponent(`Halo ShifTech, saya mau Order Website: ${product}`);
   return `https://wa.me/${ADMIN_NUMBER}?text=${text}`;
 }
 
