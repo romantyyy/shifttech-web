@@ -2,7 +2,7 @@
 
 // Ambil nomor WA dari atribut HTML supaya tidak terlihat di source JS
 const waFab = document.querySelector('.wa-fab');
-const ADMIN_NUMBER = waFab.dataset.number || '6285728875494';
+const ADMIN_NUMBER = waFab.dataset.number || '6281236863710';
 
 const PRODUCTS=[
   // Produk lama tetap
