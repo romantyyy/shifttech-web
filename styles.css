@@ -13,9 +13,32 @@
     --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* ... gaya dasar lainnya tetap sama ... */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-/* Header & Navigation (Updated and Tidy) */
+body.dark-mode {
+    font-family: var(--font-main);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.h-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header & Navigation */
 header {
     background-color: var(--bg-card);
     padding: 15px 0;
@@ -32,13 +55,13 @@ header {
     font-weight: 700;
     color: var(--accent-green);
     letter-spacing: -0.5px;
-    margin-left: 20px; /* Tambahkan sedikit margin */
+    margin-left: 20px;
 }
 
 .menu {
     display: flex;
-    gap: 15px; /* Menata jarak menu agar rapi */
-    margin-right: 20px; /* Tambahkan sedikit margin */
+    gap: 15px; /* Jarak menu rapi */
+    margin-right: 20px;
 }
 
 .menu a {
@@ -53,15 +76,103 @@ header {
 .menu a:hover, .menu a.active {
     background-color: var(--border-color);
     color: var(--text-primary);
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2); /* Sedikit glow pada menu aktif */
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
 }
 
-/* ... gaya grid dan kartu lainnya tetap sama, tetapi hapus kelas price ... */
-.card .price {
-    display: none; /* Menyembunyikan harga */
+.search-container input {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 280px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
 }
 
-/* Common Button Styles (Updated text) */
+.search-container input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Product Card */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-main);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 255, 102, 0.15);
+    border-color: var(--accent-green);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card .title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 15px 15px 5px;
+}
+
+.card .specs {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0 15px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Common Button Styles */
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.btn-wrap {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px 15px;
+}
+
+.btn.secondary {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    width: 60%;
+}
+
+.btn.secondary:hover {
+    background-color: #313d4c;
+}
+
 .btn:not(.secondary) {
     background-color: var(--accent-green);
     color: #003314;
@@ -72,7 +183,100 @@ header {
     background-color: #00d154;
 }
 
-/* Footer & Disclaimer (New) */
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 255, 102, 0.1);
+}
+
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.modal .close:hover {
+    color: var(--accent-red);
+}
+
+#modalContent h3 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+#modalContent img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+}
+
+#modalContent strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+#modalContent .specs {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* WhatsApp Floating Button */
+.wa-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wa-fab:hover {
+    transform: scale(1.05);
+    background-color: #20b157;
+}
+
+/* Footer & Disclaimer */
 footer {
     background-color: var(--bg-card);
     padding: 20px 0;
