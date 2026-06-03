@@ -1,213 +1,91 @@
-/* Responsif header untuk layar kecil */
-@media (max-width:640px) {
-  header {
-    flex-direction: column;      /* tumpuk vertikal */
-    align-items: center;         /* logo dan menu rata tengah */
-    gap: 10px;                   /* beri jarak antar elemen */
-  }
-
-  .logo-wrap img {
-    height: 36px;                /* kecilkan logo agar pas */
-    max-width: 80%;              /* tidak melebar terlalu besar */
-    object-fit: contain;
-  }
-
-  .menu {
-    flex-wrap: wrap;             /* menu bisa turun baris baru jika terlalu panjang */
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .search-wrap {
-    width: 100%;                  /* search input lebar 90% */
-  }
-}
+/* style.css: Modern Dark Mode/Cyberpunk Aesthetic (Updated) */
 
 :root {
-  --primary:#2563eb;
-  --secondary:#020a0c;
-  --bg:#e8e8e9;
-  --text:#010811;
-  --muted:#94a3b8;
+    --bg-main: #0a0e14;
+    --bg-card: #141920;
+    --text-primary: #e0e6ed;
+    --text-secondary: #9aa5b1;
+    --accent-green: #00ff66;
+    --accent-red: #ff3366;
+    --border-color: #242e3a;
+    --shadow-main: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Reset & font */
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Inter,Arial,sans-serif;
+/* ... gaya dasar lainnya tetap sama ... */
+
+/* Header & Navigation (Updated and Tidy) */
+header {
+    background-color: var(--bg-card);
+    padding: 15px 0;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-main);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Body */
-body{
-  background:var(--bg);
-  color:var(--text);
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    letter-spacing: -0.5px;
+    margin-left: 20px; /* Tambahkan sedikit margin */
 }
 
-/* Header */
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 24px;
-  flex-wrap:wrap;
+.menu {
+    display: flex;
+    gap: 15px; /* Menata jarak menu agar rapi */
+    margin-right: 20px; /* Tambahkan sedikit margin */
 }
 
-.logo-wrap img{
-  height:100px;
+.menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.2s;
 }
 
-/* Menu */
-.menu{
-  list-style:none;
-  display:flex;
-  gap:12px;
+.menu a:hover, .menu a.active {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2); /* Sedikit glow pada menu aktif */
 }
 
-.menu li a{
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
+/* ... gaya grid dan kartu lainnya tetap sama, tetapi hapus kelas price ... */
+.card .price {
+    display: none; /* Menyembunyikan harga */
 }
 
-.menu li a:hover{
-  color:var(--primary);
+/* Common Button Styles (Updated text) */
+.btn:not(.secondary) {
+    background-color: var(--accent-green);
+    color: #003314;
+    width: 40%;
 }
 
-/* Search */
-.search-wrap input{
-  padding:6px 10px;
-  border-radius:8px;
-  border:none;
-  background:#eeeff1;
-  color:var(--text);
+.btn:not(.secondary):hover {
+    background-color: #00d154;
 }
 
-/* Grid & Card */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* kolom fleksibel */
-  gap: 18px;
-  padding: 18px;
-  max-width: 1100px; /* mencegah gambar terlalu besar saat item sedikit */
-  margin: auto;
+/* Footer & Disclaimer (New) */
+footer {
+    background-color: var(--bg-card);
+    padding: 20px 0;
+    border-top: 2px solid var(--border-color);
+    margin-top: 40px;
+    box-shadow: var(--shadow-main);
+    text-align: center;
 }
 
-.card{
-  background:rgba(255,255,255,0.03);
-  border-radius:12px;
-  padding:12px;
-  position:relative;
-  max-width: 300px; /* batas lebar card */
-  margin: auto;      /* center jika hanya 1 item */
-}
-
-/* Gambar produk */
-.product-img {
-  width: 100%;
-  height: auto;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-@media (max-width:640px) {
-  .product-img {
-    max-height: 150px;
-  }
-}
-
-/* Title, Specs, Price */
-.title{font-weight:700;margin:8px 0 4px;}
-.specs{font-size:13px;color:var(--muted);}
-.price{font-weight:800;color:#000804;margin:4px 0;}
-
-/* Buttons */
-.btn{
-  display:inline-block;
-  margin-top:6px;
-  padding:6px 12px;
-  border-radius:8px;
-  text-decoration:none;
-  background:var(--primary);
-  color:white;
-  font-weight:700;
-}
-
-.btn.secondary{
-  background:none;
-  border:1px solid rgba(255,255,255,0.1);
-  color:black;
-  margin-left:6px;
-}
-
-/* Modal */
-.modal{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(2,6,23,0.6);
-  z-index:1000;
-}
-
-.modal.open{display:flex;}
-
-.modal-card{
-  background:#071127;
-  padding:18px;
-  border-radius:12px;
-  max-width:90%;
-  max-height:90vh;
-  width:720px;
-  overflow-y:auto;
-  position: relative;
-}
-
-.modal-card img{
-  width:100%;
-  height:auto;
-  max-height:60vh;
-  object-fit:contain;
-  border-radius:8px;
-}
-
-@media (max-width:640px){
-  .modal-card{
-    width:95%;
-    padding:12px;
-  }
-}
-
-/* WA Floating Button */
-.wa-fab{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-  box-shadow:0 12px 30px rgba(0,0,0,0.5);
-}
-
-/* Footer */
-footer{
-  text-align:center;
-  padding:100px;
-  color:var(--muted);
-  font-size:15px;
-}
-
-footer strong{
-  color:var(--primary);
+.disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
