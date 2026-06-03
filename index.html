@@ -1,56 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ShiftTech </title>
-    <title>ShiftTech — Untuk UMKM-Toko Laptop dan Lain Sebagainya🥰</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header>
-    <div class="logo-wrap">
-      <img src="assets/logo.jpeg" alt="ShiftTech" class="logo">
-    </div>
-    <nav>
-      <ul class="menu">
-        <li><a href="#" data-category="all">Semua</a></li>
-        <li><a href="#" data-category="laptop">Laptop</a></li>
-        <li><a href="#" data-category="pc">PC Rakitan</a></li>
-        <li><a href="#" data-category="monitor">Monitor</a></li>
-       <li><a href="https://omantyy.vercel.app/">Cek Kebocoran Data</a></li>
-      </ul>
-    </nav>
-    <div class="search-wrap">
-      <input type="text" id="search" placeholder="Cari produk..." />
-    </div>
-  </header>
+    </head>
+<body class="dark-mode">
 
-  <main>
-    <div class="grid" id="grid"></div>
-  </main>
+    <header>
+        <div class="container h-flex">
+            <h1 class="logo">SHIFTTECH CYBER STORE</h1>
+            <nav class="menu h-flex">
+                <a href="#" data-category="all" class="active">Semua Tools</a>
+                <a href="#" data-category="hardware">DIY Hardware Kits</a>
+                <a href="#" data-category="network">Audit Jaringan</a>
+                <a href="#" data-category="software">Panduan Edukasi</a>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="🔍 Cari modul DIY atau spesifikasi...">
+            </div>
+        </div>
+    </header>
 
-  <!-- Modal detail produk -->
-  <div id="modal" class="modal">
-    <div class="modal-card">
-      <button id="closeBtn" class="close">✕</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
+    <main class="container">
+        <section id="grid" class="product-grid">
+            </section>
+    </main>
 
-  <!-- WA floating -->
-<div class="wa-fab" data-number="6281236863710">
-  <a id="waLink" href="#" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" width="28" />
-  </a>
-</div>
+    <div id="modal" class="modal">
+        </div>
 
+    <a href="#" id="waLink" class="wa-fab" target="_blank" rel="noopener noreferrer">
+        <span class="wa-icon">💬</span> Tanya WA
+    </a>
 
-  <footer>
-  © ShiftTech · Jual laptop & komputer · <strong>rmnty.id@proton.me</strong> · Semua konten dilindungi undang-undang · Hubungi admin via WhatsApp
-</footer>
+    <footer>
+        <div class="disclaimer">
+            <p><strong>DISCLAIMER:</strong> Modul DIY ShiftTech ini hanya untuk tujuan edukasi, penelitian, dan pengujian penetrasi etis. Penjual tidak bertanggung jawab atas segala kerusakan atau tindakan ilegal yang timbul dari penyalahgunaan perangkat ini. Gunakan dengan bertanggung jawab.</p>
+        </div>
+    </footer>
 
-
-  <script src="app.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
