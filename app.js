@@ -4,106 +4,179 @@
 const waFab = document.querySelector('.wa-fab');
 const ADMIN_NUMBER = waFab.dataset.number || '6281236863710';
 
-const PRODUCTS=[
-  // Produk lama tetap
-  {id:'asus',category:'laptop',name:'ASUS ROG Strix G15',price:12990000,
-   images:['assets/asus1.jpg','assets/asus2.jpg','assets/asus3.jpg','assets/asus4.jpg','assets/asus5.jpg','assets/asus6.jpg'],specs:['Intel i5','RTX3050','16GB RAM','512GB SSD']},
-  {id:'asus',category:'laptop',name:'Asus VivoBook A516KA-FHD421',price:7500000,
-   images:['assets/asusvivo1.jpg','assets/asusvivo2.jpg','assets/asusvivo3.jpg','assets/asusvivo4.jpg'],specs:['Intel i5','Integrated GPU','8GB RAM','512GB SSD']},
-  {id:'asus',category:'monitor',name:'AIO ASUS M3400WUAT-BA541T-90PT0351-M01210',price:8990000,
-   images:['assets/asuspc1.jpg','assets/asuspc2.jpg','assets/asuspc3.jpg','assets/asuspc4.jpg'],specs:['AMD Ryzen 5-500U','Windows 11 Home','4GB RAM','1TB SSD']},
-  {id:'pc',category:'pc',name:'PC Rakitan Gaming',price:16990000,
-   images:['assets/pc1.avif','assets/pc2.svg','assets/pc3.svg'],specs:['Ryzen 7','RTX4060','32GB RAM','1TB SSD']},
+const PRODUCTS = [
+  // Kategori: Hardware / Gadget Pentesting
+  {
+    id: 'flipper-zero',
+    category: 'hardware',
+    name: 'Flipper Zero Multi-tool',
+    price: 4500000,
+    images: ['https://images.unsplash.com/photo-1657813662474-13dfba615959?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Sub-GHz', 'RFID', 'NFC', 'Infrared', 'GPIO Expansion', 'BadUSB Emulation']
+  },
+  {
+    id: 'wifi-deauther',
+    category: 'hardware',
+    name: 'WiFi Deauther OLED V2 (ESP8266)',
+    price: 350000,
+    images: ['https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=720&q=80'],
+    specs: ['ESP8266 Custom Firmware', 'Deauth Attack', 'Beacon Packet Spammer', 'OLED Display']
+  },
+  {
+    id: 'rubber-ducky',
+    category: 'hardware',
+    name: 'Hak5 USB Rubber Ducky',
+    price: 1850000,
+    images: ['https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Keystroke Injection', 'Ducky Script 3.0', 'MicroSD Support', 'High-Speed Emulation']
+  },
+  {
+    id: 'wifi-pineapple',
+    category: 'hardware',
+    name: 'Hak5 WiFi Pineapple Mark VII',
+    price: 4950000,
+    images: ['https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Rogue AP Automation', 'Man-in-the-Middle (MitM)', '2.4 GHz & 5 GHz Dual Band', 'PineAP Suite']
+  },
+  {
+    id: 'proxmark3',
+    category: 'hardware',
+    name: 'Proxmark3 Easy Kit RFID Cloner',
+    price: 1250000,
+    images: ['https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=720&q=80'],
+    specs: ['HF (13.56 MHz) Antenna', 'LF (125 kHz) Antenna', 'IC Card Cloning', 'Mifare Crack Support']
+  },
+  {
+    id: 'hackrf-one',
+    category: 'hardware',
+    name: 'HackRF One SDR Software Defined Radio',
+    price: 5400000,
+    images: ['https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&w=720&q=80'],
+    specs: ['1 MHz to 6 GHz Operating Freq', 'Half-Duplex Transceiver', 'Up to 20M samples per second', 'SMA Female']
+  },
+  {
+    id: 'lan-turtle',
+    category: 'hardware',
+    name: 'Hak5 LAN Turtle 3G/4G',
+    price: 2100000,
+    images: ['https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Covert Systems Administration', 'Remote SSH Access', 'MitM Network Tap', 'USB Ethernet Simulation']
+  },
+  {
+    id: 'bash-bunny',
+    category: 'hardware',
+    name: 'Hak5 Bash Bunny Core',
+    price: 2650000,
+    images: ['https://images.unsplash.com/photo-1601524909162-be87252be298?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Multi-payload Linux Attack Platform', 'USB Ethernet/Serial/Keyboard', 'Quad-Core Processor']
+  },
 
-  // Produk baru 20 item, gambar dari Unsplash / Pixabay aman untuk hotlink
-  {id:'laptop1',category:'laptop',name:'Dell XPS 13',price:18990000,
-   images:['https://images.unsplash.com/photo-1612832021359-7f121e37db33?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','512GB SSD']},
-  {id:'laptop2',category:'laptop',name:'HP Spectre x360',price:17490000,
-   images:['https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','1TB SSD']},
-  {id:'laptop3',category:'laptop',name:'MacBook Air M2',price:20990000,
-   images:['https://images.unsplash.com/photo-1640622656271-5e5a2c0c8c53?auto=format&fit=crop&w=720&q=80'],specs:['Apple M2','8GB RAM','512GB SSD']},
-  {id:'laptop4',category:'laptop',name:'Lenovo ThinkPad X1',price:16490000,
-   images:['https://images.unsplash.com/photo-1587825140504-7f27b45a209f?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','1TB SSD']},
-  {id:'laptop5',category:'laptop',name:'Acer Swift 3',price:8490000,
-   images:['https://images.unsplash.com/photo-1612831455544-7db3fef77685?auto=format&fit=crop&w=720&q=80'],specs:['Intel i5','8GB RAM','512GB SSD']},
-  {id:'laptop6',category:'laptop',name:'Asus ZenBook 14',price:12490000,
-   images:['https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','512GB SSD']},
-  {id:'laptop7',category:'laptop',name:'Microsoft Surface Laptop 4',price:15990000,
-   images:['https://images.unsplash.com/photo-1612831664175-5c53b3c6d0ec?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','512GB SSD']},
-  {id:'laptop8',category:'laptop',name:'Razer Blade 15',price:22490000,
-   images:['https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','32GB RAM','1TB SSD','RTX3060']},
-  {id:'laptop9',category:'laptop',name:'LG Gram 16',price:16990000,
-   images:['https://images.unsplash.com/photo-1612831455544-7db3fef77685?auto=format&fit=crop&w=720&q=80'],specs:['Intel i7','16GB RAM','512GB SSD']},
-  {id:'laptop10',category:'laptop',name:'Samsung Galaxy Book',price:11490000,
-   images:['https://images.unsplash.com/photo-1612832021359-7f121e37db33?auto=format&fit=crop&w=720&q=80'],specs:['Intel i5','8GB RAM','256GB SSD']},
+  // Kategori: Network / Aksesoris Audit Jaringan
+  {
+    id: 'alfa-awus036ach',
+    category: 'network',
+    name: 'Alfa AWUS036ACH WiFi Adapter',
+    price: 1350000,
+    images: ['https://images.unsplash.com/photo-1625316708582-7c38734be31d?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Realtek RTL8812AU', 'Packet Injection Support', 'Monitor Mode', 'Dual-Band 2.4GHz/5GHz']
+  },
+  {
+    id: 'tp-link-wn722n',
+    category: 'network',
+    name: 'TP-Link TL-WN722N v1 (Modified)',
+    price: 275000,
+    images: ['https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Atheros AR9271 Chipset', 'Native Monitor Mode', 'Packet Injection', 'External High Gain Antenna']
+  },
+  {
+    id: 'pluto-sdr',
+    category: 'network',
+    name: 'Adalm-Pluto SDR Active Learning Module',
+    price: 3950000,
+    images: ['https://images.unsplash.com/photo-1581092334651-ddf26d9aae9d?auto=format&fit=crop&w=720&q=80'],
+    specs: ['325 MHz to 3.8 GHz', 'Full-Duplex RF', 'GNU Radio Compatible', 'MATLAB Simulink Support']
+  },
 
-  {id:'pc1',category:'pc',name:'PC Gaming Ryzen 5',price:14990000,
-   images:['https://images.unsplash.com/photo-1603781045685-1b7e0e9e3e87?auto=format&fit=crop&w=720&q=80'],specs:['Ryzen 5','RTX3060','16GB RAM','512GB SSD']},
-  {id:'pc2',category:'pc',name:'PC Workstation Intel i9',price:24990000,
-   images:['https://images.unsplash.com/photo-1603781005685-1b7e0e9e3e87?auto=format&fit=crop&w=720&q=80'],specs:['Intel i9','RTX3080','32GB RAM','1TB SSD']},
-  {id:'pc3',category:'pc',name:'PC Mini ITX',price:10990000,
-   images:['https://images.unsplash.com/photo-1612831523455-3c53b3c6d0ec?auto=format&fit=crop&w=720&q=80'],specs:['Intel i5','16GB RAM','512GB SSD']},
-  {id:'pc4',category:'pc',name:'PC Office Intel i3',price:5990000,
-   images:['https://images.unsplash.com/photo-1612831523455-3c53b3c6d0ec?auto=format&fit=crop&w=720&q=80'],specs:['Intel i3','8GB RAM','256GB SSD']},
-
-  {id:'monitor1',category:'monitor',name:'Dell UltraSharp 27"',price:7490000,
-   images:['https://images.unsplash.com/photo-1587825140504-7f27b45a209f?auto=format&fit=crop&w=720&q=80'],specs:['27 inch','IPS','4K']},
-  {id:'monitor2',category:'monitor',name:'LG 24" Gaming Monitor',price:4290000,
-   images:['https://images.unsplash.com/photo-1603781005685-1b7e0e9e3e87?auto=format&fit=crop&w=720&q=80'],specs:['24 inch','144Hz','1080p']},
-  {id:'monitor3',category:'monitor',name:'Samsung Curved 32"',price:8990000,
-   images:['https://images.unsplash.com/photo-1612831523455-3c53b3c6d0ec?auto=format&fit=crop&w=720&q=80'],specs:['32 inch','Curved','4K']},
-  {id:'monitor4',category:'monitor',name:'Asus TUF Gaming 27"',price:6990000,
-   images:['https://images.unsplash.com/photo-1612831455544-7db3fef77685?auto=format&fit=crop&w=720&q=80'],specs:['27 inch','144Hz','1080p']},
+  // Kategori: Software / Lisensi & Lab OSINT
+  {
+    id: 'maltego-pro',
+    category: 'software',
+    name: 'Maltego Professional 1-Year License',
+    price: 18000000,
+    images: ['https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Link Analysis', 'OSINT Data Integration', 'Threat Intelligence Graph', 'Unlimited Entities']
+  },
+  {
+    id: 'burp-suite',
+    category: 'software',
+    name: 'Burp Suite Professional Annual License',
+    price: 7490000,
+    images: ['https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=720&q=80'],
+    specs: ['Advanced Web Vulnerability Scanner', 'Custom Intruder Payloads', 'Intercepting Proxy', 'BApp Extensions']
+  },
+  {
+    id: 'shodan-member',
+    category: 'software',
+    name: 'Shodan Enterprise API Key Pack',
+    price: 5200000,
+    images: ['https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=720&q=80'],
+    specs: ['IoT Search Engine Access', 'Continuous Network Monitoring', 'Banners & IP Threat Intel', 'Full API Access']
+  }
 ];
 
 // Fungsi format Rupiah
 function formatRupiah(n){
-  return 'Rp'+n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-const grid=document.getElementById('grid');
+const grid = document.getElementById('grid');
 
 // Render produk
 function renderProducts(list){
-  grid.innerHTML='';
+  grid.innerHTML = '';
+  if (list.length === 0) {
+    grid.innerHTML = '<div style="color: #ff5555; text-align:center; width:100%; grid-column: 1/-1; padding: 20px;">Alat/Tools tidak ditemukan.</div>';
+    return;
+  }
+  
   list.forEach(p=>{
-    const card=document.createElement('article'); 
-    card.className='card';
+    const card = document.createElement('article'); 
+    card.className = 'card';
 
-    const img=document.createElement('img'); 
-    img.src=p.images[0]; 
-    img.alt=p.name; 
-    img.className='product-img'; 
+    const img = document.createElement('img'); 
+    img.src = p.images[0]; 
+    img.alt = p.name; 
+    img.className = 'product-img'; 
     card.appendChild(img);
 
-    const t=document.createElement('div'); 
-    t.className='title'; 
-    t.textContent=p.name; 
+    const t = document.createElement('div'); 
+    t.className = 'title'; 
+    t.textContent = p.name; 
     card.appendChild(t);
 
-    const s=document.createElement('div'); 
-    s.className='specs'; 
-    s.textContent=p.specs.join(' · '); 
+    const s = document.createElement('div'); 
+    s.className = 'specs'; 
+    s.textContent = p.specs.join(' · '); 
     card.appendChild(s);
 
-    const pr=document.createElement('div'); 
-    pr.className='price'; 
-    pr.textContent=formatRupiah(p.price); 
+    const pr = document.createElement('div'); 
+    pr.className = 'price'; 
+    pr.textContent = formatRupiah(p.price); 
     card.appendChild(pr);
 
-    const btnWrap=document.createElement('div');
-    const detail=document.createElement('button'); 
-    detail.className='btn secondary'; 
-    detail.textContent='Lihat Detail'; 
-    detail.onclick=()=>openModal(p);
+    const btnWrap = document.createElement('div');
+    const detail = document.createElement('button'); 
+    detail.className = 'btn secondary'; 
+    detail.textContent = 'Lihat Detail Spec'; 
+    detail.onclick = () => openModal(p);
     btnWrap.appendChild(detail);
 
-    const wa=document.createElement('a'); 
-    wa.className='btn'; 
-    wa.textContent='Tanya WA'; 
-    wa.href=makeWA(p.name); 
-    wa.target='_blank'; 
-    wa.rel='noopener noreferrer'; 
+    const wa = document.createElement('a'); 
+    wa.className = 'btn'; 
+    wa.textContent = 'Order via WA'; 
+    wa.href = makeWA(p.name); 
+    wa.target = '_blank'; 
+    wa.rel = 'noopener noreferrer'; 
     btnWrap.appendChild(wa);
 
     card.appendChild(btnWrap);
@@ -112,103 +185,104 @@ function renderProducts(list){
 }
 
 // Modal
-const modal=document.getElementById('modal'),
-      modalContent=document.getElementById('modalContent'),
-      closeBtn=document.getElementById('closeBtn');
-let currentSlide=0;
+const modal = document.getElementById('modal'),
+      modalContent = document.getElementById('modalContent'),
+      closeBtn = document.getElementById('closeBtn');
+let currentSlide = 0;
 
 function openModal(p){
-  modalContent.innerHTML=''; 
-  currentSlide=0;
+  modalContent.innerHTML = ''; 
+  currentSlide = 0;
 
-  const h=document.createElement('h3'); 
-  h.textContent=p.name; 
+  const h = document.createElement('h3'); 
+  h.textContent = p.name; 
   modalContent.appendChild(h);
 
-  const imgWrapper=document.createElement('div'); 
-  imgWrapper.style.position='relative'; 
-  imgWrapper.style.textAlign='center';
+  const imgWrapper = document.createElement('div'); 
+  imgWrapper.style.position = 'relative'; 
+  imgWrapper.style.textAlign = 'center';
 
-  const img=document.createElement('img'); 
-  img.src=p.images[currentSlide]; 
-  img.alt=p.name; 
+  const img = document.createElement('img'); 
+  img.src = p.images[currentSlide]; 
+  img.alt = p.name; 
   imgWrapper.appendChild(img);
 
-  if(p.images.length>1){
-    const prev=document.createElement('button'); 
-    prev.type='button'; 
-    prev.textContent='❮';
-    prev.style.position='absolute'; 
-    prev.style.left='10px'; 
-    prev.style.top='50%';
-    prev.style.transform='translateY(-50%)'; 
-    prev.style.fontSize='24px'; 
-    prev.style.background='rgba(0,0,0,0.3)'; 
-    prev.style.color='#fff';
-    prev.style.borderRadius='50%'; 
-    prev.style.width='36px'; 
-    prev.style.height='36px';
-    prev.onclick=e=>{ e.stopPropagation(); currentSlide=(currentSlide-1+p.images.length)%p.images.length; img.src=p.images[currentSlide]; };
+  if(p.images.length > 1){
+    const prev = document.createElement('button'); 
+    prev.type = 'button'; 
+    prev.textContent = '❮';
+    prev.style.position = 'absolute'; 
+    prev.style.left = '10px'; 
+    prev.style.top = '50%';
+    prev.style.transform = 'translateY(-50%)'; 
+    prev.style.fontSize = '24px'; 
+    prev.style.background = 'rgba(0,0,0,0.3)'; 
+    prev.style.color = '#fff';
+    prev.style.borderRadius = '50%'; 
+    prev.style.width = '36px'; 
+    prev.style.height = '36px';
+    prev.onclick = e => { e.stopPropagation(); currentSlide = (currentSlide - 1 + p.images.length) % p.images.length; img.src = p.images[currentSlide]; };
     imgWrapper.appendChild(prev);
 
-    const next=document.createElement('button'); 
-    next.type='button'; 
-    next.textContent='❯';
-    next.style.position='absolute'; 
-    next.style.right='10px'; 
-    next.style.top='50%';
-    next.style.transform='translateY(-50%)'; 
-    next.style.fontSize='24px'; 
-    next.style.background='rgba(0,0,0,0.3)'; 
-    next.style.color='#fff'; 
-    next.style.borderRadius='50%'; 
-    next.style.width='36px'; 
-    next.style.height='36px'; 
-    next.onclick=e=>{ e.stopPropagation(); currentSlide=(currentSlide+1)%p.images.length; img.src=p.images[currentSlide]; };
+    const next = document.createElement('button'); 
+    next.type = 'button'; 
+    next.textContent = '❯';
+    next.style.position = 'absolute'; 
+    next.style.right = '10px'; 
+    next.style.top = '50%';
+    next.style.transform = 'translateY(-50%)'; 
+    next.style.fontSize = '24px'; 
+    next.style.background = 'rgba(0,0,0,0.3)'; 
+    next.style.color = '#fff'; 
+    next.style.borderRadius = '50%'; 
+    next.style.width = '36px'; 
+    next.style.height = '36px'; 
+    next.onclick = e => { e.stopPropagation(); currentSlide = (currentSlide + 1) % p.images.length; img.src = p.images[currentSlide]; };
     imgWrapper.appendChild(next);
   }
 
   modalContent.appendChild(imgWrapper);
 
-  const sp=document.createElement('p'); 
-  sp.className='specs'; 
-  sp.textContent='Spesifikasi: '+p.specs.join(', '); 
+  const sp = document.createElement('p'); 
+  sp.className = 'specs'; 
+  sp.textContent = 'Fitur & Spesifikasi Teknis: ' + p.specs.join(', '); 
   modalContent.appendChild(sp);
 
-  const pr=document.createElement('p'); 
-  pr.className='price'; 
-  pr.textContent=formatRupiah(p.price); 
+  const pr = document.createElement('p'); 
+  pr.className = 'price'; 
+  pr.textContent = formatRupiah(p.price); 
   modalContent.appendChild(pr);
 
-  const buy=document.createElement('a'); 
-  buy.className='btn'; 
-  buy.textContent='Tanya & Order via WA';
-  buy.href=makeWA(p.name); 
-  buy.target='_blank'; 
-  buy.rel='noopener noreferrer'; 
+  const buy = document.createElement('a'); 
+  buy.className = 'btn'; 
+  buy.textContent = 'Konsultasi & Order via WA';
+  buy.href = makeWA(p.name); 
+  buy.target = '_blank'; 
+  buy.rel = 'noopener noreferrer'; 
   modalContent.appendChild(buy);
 
   modal.classList.add('open');
 }
 
-closeBtn.onclick=()=>modal.classList.remove('open');
-modal.onclick=e=>{if(e.target===modal) modal.classList.remove('open');};
+closeBtn.onclick = () => modal.classList.remove('open');
+modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); };
 
 function makeWA(product){
-  const text=encodeURIComponent(`Halo ShifTech,: ${product}`);
+  // Mengubah sapaan teks WA agar sesuai dengan tema Platform Red Team / Cyber Security
+  const text = encodeURIComponent(`Halo ShiftTech Cyber Store, saya tertarik untuk memesan/konsultasi perangkat ini: ${product}`);
   return `https://wa.me/${ADMIN_NUMBER}?text=${text}`;
 }
 
-document.getElementById('waLink').href=makeWA('');
+document.getElementById('waLink').href = makeWA('Umum');
 
 // Search
-const search=document.getElementById('search');
-search.addEventListener('input',()=>{
-  const raw=search.value;
-  const clean=sanitize(raw);
-  if(clean!==raw) search.value=clean;
+const search = document.getElementById('search');
+search.addEventListener('input', () => {
+  const raw = search.value;
+  const clean = sanitize(raw);
+  if(clean !== raw) search.value = clean;
 
-  const filtered=PRODUCTS.filter(p=>
+  const filtered = PRODUCTS.filter(p =>
     p.name.toLowerCase().includes(clean.toLowerCase()) ||
     p.specs.join(' ').toLowerCase().includes(clean.toLowerCase())
   );
@@ -216,17 +290,17 @@ search.addEventListener('input',()=>{
 });
 
 function sanitize(s){
-  return s.replace(/[^\w\s.\-]/g,'').slice(0,60);
+  return s.replace(/[^\w\s.\-]/g, '').slice(0, 60);
 }
 
 renderProducts(PRODUCTS);
 
-// Menu kategori
-document.querySelectorAll('.menu a').forEach(a=>{
-  a.addEventListener('click',e=>{
+// Menu kategori (Hubungkan dengan 'hardware', 'network', atau 'software' di HTML Anda)
+document.querySelectorAll('.menu a').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
-    const cat=a.dataset.category;
-    const filtered=(cat==='all')?PRODUCTS:PRODUCTS.filter(p=>p.category===cat);
+    const cat = a.dataset.category;
+    const filtered = (cat === 'all') ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
     renderProducts(filtered);
   });
 });
