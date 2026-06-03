@@ -1,10 +1,10 @@
 'use strict';
 
-// Gunakan nomor WA admin Anda, simpan di HTML dataset jika untuk produksi.
+// Nomor WA admin
 const ADMIN_NUMBER = '6281236863710'; // Ganti dengan nomor WA Anda
 
 const PRODUCTS = [
-    // ShiftTech WiFi Kill Module v1 - Berdasarkan foto Anda
+    // ShiftTech WiFi Kill Module v1 - Produk asli buatan Anda
     {
         id: 'shifttech-wifi-kill-v1',
         category: 'hardware',
@@ -26,11 +26,6 @@ const PRODUCTS = [
         ]
     }
 ];
-
-// Fungsi format Rupiah (Tetap ada untuk internal, tidak digunakan untuk display harga)
-function formatRupiah(n) {
-    return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
 
 const grid = document.getElementById('grid');
 
@@ -62,12 +57,6 @@ function renderProducts(list) {
         specs.textContent = p.specs.slice(0, 3).join(' · '); // Hanya tampilkan 3 spek awal
         card.appendChild(specs);
 
-        // Hapus rendering harga
-        // const price = document.createElement('div');
-        // price.className = 'price';
-        // price.textContent = formatRupiah(p.price);
-        // card.appendChild(price);
-
         const btnWrap = document.createElement('div');
         btnWrap.className = 'btn-wrap';
 
@@ -79,7 +68,7 @@ function renderProducts(list) {
 
         const waLink = document.createElement('a');
         waLink.className = 'btn';
-        // Ganti teks tombol menjadi 'Tanya WA'
+        // Teks tombol diperbarui
         waLink.textContent = 'Tanya WA';
         waLink.href = makeWAUrl(p.name, 'saya tertarik untuk menanyakan harga dan memesan modul');
         waLink.target = '_blank';
@@ -91,7 +80,11 @@ function renderProducts(list) {
     });
 }
 
-// ... fungsi modal lainnya tetap sama, tetapi hapus harga di dalamnya ...
+// Modal Detail Produk
+const modal = document.getElementById('modal');
+const modalContent = document.getElementById('modalContent');
+const closeBtn = document.getElementById('closeBtn');
+
 function openModal(p) {
     modalContent.innerHTML = ''; // Hapus konten sebelumnya
 
@@ -114,16 +107,10 @@ function openModal(p) {
     specsList.innerHTML = p.specs.join(', '); // Gabungkan semua spek
     modalContent.appendChild(specsList);
 
-    // Hapus rendering harga di modal
-    // const price = document.createElement('p');
-    // price.className = 'price';
-    // price.textContent = formatRupiah(p.price);
-    // modalContent.appendChild(price);
-
     const buyLink = document.createElement('a');
     buyLink.className = 'btn';
     buyLink.style.width = '100%'; // Lebarkan tombol di modal
-    buyLink.textContent = 'Tanya / Order via WA';
+    buyLink.textContent = 'Konsultasi & Order via WA';
     buyLink.href = makeWAUrl(p.name, 'konsultasi & order');
     buyLink.target = '_blank';
     buyLink.rel = 'noopener noreferrer';
@@ -132,4 +119,50 @@ function openModal(p) {
     modal.classList.add('open');
 }
 
-// ... fungsi lainnya tetap sama ...
+// Close Modal
+closeBtn.onclick = () => modal.classList.remove('open');
+modal.onclick = e => { if (e.target === modal) modal.classList.remove('open'); };
+
+// Buat WA URL
+function makeWAUrl(product, message) {
+    const text = encodeURIComponent(`Halo ShiftTech Cyber Store, saya ingin ${message}: ${product}`);
+    return `https://wa.me/${ADMIN_NUMBER}?text=${text}`;
+}
+
+// Atur WA link default di floating button
+document.getElementById('waLink').href = makeWAUrl('Konsultasi DIY Module', 'konsultasi');
+
+// Search & Sanitize
+const search = document.getElementById('search');
+search.addEventListener('input', () => {
+    const rawInput = search.value;
+    const cleanInput = sanitize(rawInput);
+    if (cleanInput !== rawInput) search.value = cleanInput;
+
+    const filtered = PRODUCTS.filter(p =>
+        p.name.toLowerCase().includes(cleanInput.toLowerCase()) ||
+        p.specs.join(' ').toLowerCase().includes(cleanInput.toLowerCase())
+    );
+    renderProducts(filtered);
+});
+
+function sanitize(s) {
+    return s.replace(/[^\w\s.\-]/g, '').slice(0, 60);
+}
+
+// Startup
+renderProducts(PRODUCTS);
+
+// Category Menu
+document.querySelectorAll('.menu a').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        // Atur menu aktif
+        document.querySelectorAll('.menu a').forEach(el => el.classList.remove('active'));
+        a.classList.add('active');
+
+        const cat = a.dataset.category;
+        const filtered = (cat === 'all') ? PRODUCTS : PRODUCTS.filter(p => p.category === cat);
+        renderProducts(filtered);
+    });
+});
